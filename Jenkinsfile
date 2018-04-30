@@ -1,11 +1,14 @@
 
-node {
-    stage 'Checkout'
-
-    checkout scm
-
-    stage 'Gradle Static Analysis'
-    withSonarQubeEnv {
-        sh "./gradlew clean sonarqube"
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                def scannerHome = tool 'SonarQubeScanner3'
+                withSonarQubeEnv('SonarQube') {
+                    sh "${scannerHome}/bin/sonar-scanner"
+                }
+            }
+        }
     }
-}   
+}
