@@ -1,10 +1,9 @@
-
 pipeline {
     environment {
         def scannerHome = "tool 'sonar_scanner'"
     }
     agent any
-    stages 
+    stages {
       stage('Build') {
           steps {
                  withSonarQubeEnv('sonar') {
@@ -13,3 +12,4 @@ pipeline {
             }
         }
     }
+}
