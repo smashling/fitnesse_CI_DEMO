@@ -1,4 +1,6 @@
 pipeline {
+  agent any
+  stages {
   //stage('SCM') {
    // git 'https://github.com/foo/bar.git'
   //}
@@ -8,4 +10,5 @@ pipeline {
      sh './gradlew --info sonarqube'
     }
   }
+ }
 }
