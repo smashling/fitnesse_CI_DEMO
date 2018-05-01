@@ -1,15 +1,11 @@
 pipeline {
-    environment {
-        def scannerHome = "tool 'sonar_scanner'"
+  //stage('SCM') {
+   // git 'https://github.com/foo/bar.git'
+  //}
+  stage('SonarQube analysis') {
+    withSonarQubeEnv('My SonarQube Server') {
+
+     sh './gradlew --info sonarqube'
     }
-    agent any
-    stages {
-      stage('Build') {
-          steps {
-                 withSonarQubeEnv('sonar') {
-                    sh "${scannerHome}/bin/sonar-scanner"
-                 }
-            }
-        }
-    }
+  }
 }
