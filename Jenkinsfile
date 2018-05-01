@@ -1,11 +1,12 @@
 
 pipeline {
+    environment {
+        def scannerHome = "tool 'sonar_scanner'"
     agent any
-    stages {
-        stage('Build') {
-            steps {
-                def scannerHome = "tool 'sonar_scanner'"
-                withSonarQubeEnv('sonar') {
+    stages 
+      stage('Build') {
+          steps {
+                 withSonarQubeEnv('sonar') {
                     sh "${scannerHome}/bin/sonar-scanner"
                 }
             }
